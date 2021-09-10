@@ -12,6 +12,7 @@ import fs from 'fs';
   try {
     const start = Date.now();
     const template = getInput('input');
+    const output = getInput('output');
     const debug = getInput('debug') === 'true';
     const templateContent = fs.readFileSync(template, 'utf8');
     const compiledTemplate = handlebars.compile(templateContent);
@@ -26,7 +27,7 @@ import fs from 'fs';
       console.log(parsedContent); // eslint-disable-line
     }
 
-    fs.writeFileSync(parsedContent, 'utf8');
+    fs.writeFileSync(output, parsedContent, 'utf8');
 
     setOutput('time', Date.now() - start);
   } catch (error) {
