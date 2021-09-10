@@ -16,7 +16,45 @@
 
 ## Usage
 
-TODO
+Include this job in your github action wile
+```
+  - name: Parse config file
+    uses: edgardleal/mustache-template-action@v1.0.0
+    env:
+      ENV: dev
+    with:
+      input: templates/config.json
+      output: config.json
+```
+
+Possible content for templates/config.json
+
+```json
+{
+  "mykey": "{{ ENV }}"
+}
+```
+
+## Parameters
+
+### input
+
+> The path of template file
+
+* required = `true`
+
+### output
+
+> The path of output file
+
+* required = `true`
+
+### debug 
+
+> Print the parsed content on console
+
+* required = `false`
+* default = `false`
 
 ## Author
 

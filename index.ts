@@ -12,6 +12,7 @@ import fs from 'fs';
   try {
     const start = Date.now();
     const template = core.getInput('input');
+    const debug = core.getInput('debug') === 'true';
     const templateContent = fs.readFileSync(template, 'utf8');
     const compiledTemplate = handlebars.compile(templateContent);
 
@@ -20,6 +21,10 @@ import fs from 'fs';
       context: github.context,
       ...process.env,
     });
+
+    if (debug) {
+      console.log(parsedContent); // eslint-disable-line
+    }
 
     fs.writeFileSync(parsedContent, 'utf8');
 

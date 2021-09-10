@@ -25,9 +25,13 @@ const fs_1 = __importDefault(require("fs"));
     try {
         const start = Date.now();
         const template = core_1.default.getInput('input');
+        const debug = core_1.default.getInput('debug') === 'true';
         const templateContent = fs_1.default.readFileSync(template, 'utf8');
         const compiledTemplate = handlebars_1.default.compile(templateContent);
         const parsedContent = compiledTemplate(Object.assign({ now: new Date(), context: github_1.default.context }, process.env));
+        if (debug) {
+            console.log(parsedContent); // eslint-disable-line
+        }
         fs_1.default.writeFileSync(parsedContent, 'utf8');
         core_1.default.setOutput('time', Date.now() - start);
     }
