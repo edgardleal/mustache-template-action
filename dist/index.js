@@ -17,15 +17,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @module index.ts
  */
-const core_1 = __importDefault(require("@actions/core"));
+const core_1 = require("@actions/core");
 const github_1 = __importDefault(require("@actions/github"));
 const handlebars_1 = __importDefault(require("handlebars"));
 const fs_1 = __importDefault(require("fs"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const start = Date.now();
-        const template = core_1.default.getInput('input');
-        const debug = core_1.default.getInput('debug') === 'true';
+        const template = core_1.getInput('input');
+        const debug = core_1.getInput('debug') === 'true';
         const templateContent = fs_1.default.readFileSync(template, 'utf8');
         const compiledTemplate = handlebars_1.default.compile(templateContent);
         const parsedContent = compiledTemplate(Object.assign({ now: new Date(), context: github_1.default.context }, process.env));
@@ -33,9 +33,10 @@ const fs_1 = __importDefault(require("fs"));
             console.log(parsedContent); // eslint-disable-line
         }
         fs_1.default.writeFileSync(parsedContent, 'utf8');
-        core_1.default.setOutput('time', Date.now() - start);
+        core_1.setOutput('time', Date.now() - start);
     }
     catch (error) {
-        core_1.default.setFailed(error.message);
+        console.error('Error: %s', error.message); // eslint-disable-line
+        core_1.setFailed(error.message);
     }
 }))();
