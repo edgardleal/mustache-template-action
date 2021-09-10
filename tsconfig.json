@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "target": "ES2016",
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "outDir": "dist",
+      "esModuleInterop": true
+    },
+    "typeRoots": [
+      "./"
+    ],
+    "include": ["src/**/*.ts", "index.ts"],
+    "exclude": ["node_modules"],
+    "compileOnSave": true,
+    "buildOnSave": true
+  }
+  

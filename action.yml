@@ -1,0 +1,15 @@
+name: 'Mustache Template Action'
+description: 'Parse mustache template files using environment variables as replacement'
+inputs:
+  input:  # id da entrada
+    description: 'File location to input template'
+    required: true
+  output:
+    description: 'Path for output file'
+    required: false
+outputs:
+  time: # id da saída
+    description: 'The time we greeted you'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
