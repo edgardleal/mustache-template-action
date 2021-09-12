@@ -1,8 +1,9 @@
 <h1 align="center">Welcome to mustache-template-action 👋</h1>
 <p>
-  <a href="https://www.npmjs.com/package/ts-template" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/ts-template.svg">
+  <a href="https://github.com/edgardleal/mustache-template-action/actions/workflows/validate.yml" target="_blank">
+    <img alt="Validate" src="https://github.com/edgardleal/mustache-template-action/actions/workflows/validate.yml/badge.svg">
   </a>
+
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
