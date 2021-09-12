@@ -8,7 +8,6 @@ module.exports = {
   ],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    'index.ts',
   ],
   coverageThreshold: {
     global: {

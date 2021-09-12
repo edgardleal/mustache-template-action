@@ -3,10 +3,9 @@
  *
  * @module index.ts
  */
+import { readFileSync, writeFileSync } from 'fs';
 import { setOutput, getInput, setFailed } from '@actions/core';
-import { context } from '@actions/github';
-import handlebars from 'handlebars';
-import fs from 'fs';
+import parse from './src/parser';
 
 (async () => {
   try {
@@ -14,20 +13,15 @@ import fs from 'fs';
     const template = getInput('input');
     const output = getInput('output');
     const debug = getInput('debug') === 'true';
-    const templateContent = fs.readFileSync(template, 'utf8');
-    const compiledTemplate = handlebars.compile(templateContent);
+    const templateContent = readFileSync(template, 'utf8');
 
-    const parsedContent = compiledTemplate({
-      now: new Date(),
-      context,
-      ...process.env,
-    });
+    const parsedContent = parse(templateContent);
 
     if (debug) {
       console.log(parsedContent); // eslint-disable-line
     }
 
-    fs.writeFileSync(output, parsedContent, 'utf8');
+    writeFileSync(output, parsedContent, 'utf8');
 
     setOutput('time', Date.now() - start);
   } catch (error) {

@@ -1,1 +1,3 @@
 coverage
+dist/src/__tests__
+node_modules/.last_lint

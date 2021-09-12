@@ -17,23 +17,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @module index.ts
  */
+const fs_1 = require("fs");
 const core_1 = require("@actions/core");
-const github_1 = require("@actions/github");
-const handlebars_1 = __importDefault(require("handlebars"));
-const fs_1 = __importDefault(require("fs"));
+const parser_1 = __importDefault(require("./src/parser"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const start = Date.now();
         const template = core_1.getInput('input');
         const output = core_1.getInput('output');
         const debug = core_1.getInput('debug') === 'true';
-        const templateContent = fs_1.default.readFileSync(template, 'utf8');
-        const compiledTemplate = handlebars_1.default.compile(templateContent);
-        const parsedContent = compiledTemplate(Object.assign({ now: new Date(), context: github_1.context }, process.env));
+        const templateContent = fs_1.readFileSync(template, 'utf8');
+        const parsedContent = parser_1.default(templateContent);
         if (debug) {
             console.log(parsedContent); // eslint-disable-line
         }
-        fs_1.default.writeFileSync(output, parsedContent, 'utf8');
+        fs_1.writeFileSync(output, parsedContent, 'utf8');
         core_1.setOutput('time', Date.now() - start);
     }
     catch (error) {

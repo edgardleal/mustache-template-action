@@ -22,7 +22,7 @@ node_modules/.bin/tsc: package.json
 	touch node_modules/.bin/tsc
 
 run: dist/index.js lint
-	DEBUG=sanar* node dist/index.js
+	DEBUG=*action* node dist/index.js
 
 dist/index.js: $(SOURCES) node_modules/.bin/tsc
 	./node_modules/.bin/tsc -p tsconfig.json
@@ -36,7 +36,7 @@ node_modules/.bin/jest: package.json
 install: node_modules/.bin/jest
 
 coverage/index.html: $(SOURCES) node_modules/.bin/jest
-	DEBUG=sanar* yarn test --coverage --coverageReporters html
+	DEBUG=*action* yarn test --coverage --coverageReporters html
 
 test: coverage/index.html
 

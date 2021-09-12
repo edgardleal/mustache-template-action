@@ -31,8 +31,65 @@ Possible content for templates/config.json
 
 ```json
 {
-  "mykey": "{{ ENV }}"
+  "mykey": "{{ ENV }}",
+  "database": "{{#if eq(ENV, 'dev')}}localhost{{else}}{{PRODUCTION_DB}}{{/if}}"
 }
+```
+
+## Custom helpers
+
+> this project include some custom helpers to complement the builtin from mustache
+
+### eq
+
+Receive two parameters and return a `boolean` informing if these values are equals
+
+```
+{{#if eq(A, B)}}
+  A and B are equals ({{A}}, {{B}})
+{{else}}
+  A anb B are not equals
+{{/if}}
+```
+
+> in this example A and B are environment variables
+
+### neq
+
+The saem `eq` but negating. ( check is values are not equals )
+
+### loop
+
+This helper is similar to builtin [each](https://handlebarsjs.com/guide/builtin-helpers.html#each) from mustache, but it works with
+string lists.
+
+Parameters:
+
+* a `string` with the list ( `"t,f,r,s"` ) or a environment variable name with these list
+* The list delimiter. The default value is `,`
+
+Ex.:
+
+Having a environment variable as the bellow:
+
+`LIST="1,2,3,4,5"`
+
+You can create a loop throughout these values as the code bellow:
+
+```
+{{#loop LIST ","}}
+Value: {{this}}
+{{/loop}}
+```
+
+Will generate the follow output:
+
+```
+Value: 1
+Value: 2
+Value: 3
+Value: 4
+Value: 5
 ```
 
 ## Parameters
